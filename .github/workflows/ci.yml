@@ -21,6 +21,7 @@ jobs:
     strategy:
       matrix:
         targetplatform: [x86, x64]
+      fail-fast: false
 
     runs-on: windows-latest
 
