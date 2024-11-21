@@ -10,7 +10,7 @@
     <StartupObject>MyWPFApp.App</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <PlatformTarget>$(Platform)</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="AppInsights.WindowsDesktop" Version="2.18.1" />

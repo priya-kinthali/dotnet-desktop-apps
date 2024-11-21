@@ -20,7 +20,7 @@ jobs:
 
     strategy:
       matrix:
-        targetplatform: [x86, x64]
+        targetplatform: [x86]
       fail-fast: false
 
     runs-on: windows-latest
