@@ -46,11 +46,21 @@ jobs:
       uses: dotnet/nbgv@master
       id: nbgv
 
-    # Install the .NET Core workload
-    - name: Install .NET Core
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: '6.0.x'
+    # # Install the .NET Core workload
+    # - name: Install .NET Core
+    #   uses: actions/setup-dotnet@v4
+    #   with:
+    #     dotnet-version: '6.0.x'
+        # Install .NET Core 6.0 manually
+    - name: Install .NET Core 6.0
+      run: |
+        curl -SL --output dotnet-install.sh https://dot.net/v1/dotnet-install.sh
+        chmod +x ./dotnet-install.sh
+        ./dotnet-install.sh --version 6.0.0
+        ./dotnet-install.sh --version 6.0.0 --runtime aspnetcore
+        ./dotnet-install.sh --version 6.0.0 --runtime windowsdesktop
+        echo "::add-path::$(pwd)/.dotnet"
+        echo "::set-env name=DOTNET_ROOT::$(pwd)/.dotnet"
 
     # Add  MsBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
