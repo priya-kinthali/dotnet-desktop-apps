@@ -70,6 +70,7 @@ jobs:
         $dotnetRoot = "$(pwd)/.dotnet"
         echo "DOTNET_ROOT=$dotnetRoot" >> $env:GITHUB_ENV
         echo "$dotnetRoot" >> $env:GITHUB_PATH
+        echo "$dotnetRoot/tools" >> $env:GITHUB_PATH
       shell: pwsh
     - name: Check .NET Version
       run: |
