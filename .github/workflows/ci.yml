@@ -69,7 +69,9 @@ jobs:
         ./dotnet-install.ps1 -Version 6.0.100
         echo "::add-path::$(pwd)/.dotnet"
       shell: pwsh
-
+    - name: Check .NET Version
+      run: dotnet --version
+      shell: pwsh
     # Add  MsBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v2
