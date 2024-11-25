@@ -65,10 +65,11 @@ jobs:
     #     dotnet-version: '9.0.x'
     # Install .NET 6.0.100 manually
 
+    # Install .NET 6.0.100 manually
     - name: Install .NET 6.0.100
       run: |
         Invoke-WebRequest -Uri https://dot.net/v1/dotnet-install.sh -OutFile dotnet-install.sh
-        chmod +x ./dotnet-install.sh
+        Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
         ./dotnet-install.sh --version 6.0.100 --install-dir $HOME/dotnet
       shell: pwsh
       env:
