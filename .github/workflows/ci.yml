@@ -50,10 +50,10 @@ jobs:
     - name: Install Visual Studio Build Tools
       run: |
           curl -L -o vs_buildtools.exe https://aka.ms/vs/17/release/vs_buildtools.exe
-          start /wait vs_buildtools.exe --quiet --wait --norestart --nocache \
-            --installPath C:\BuildTools \
-            --add Microsoft.VisualStudio.Workload.CoreEditor \
-            --add Microsoft.VisualStudio.Workload.ManagedDesktopBuildTools \
+          ./vs_buildtools.exe --quiet --wait --norestart --nocache `
+            --installPath C:\BuildTools `
+            --add Microsoft.VisualStudio.Workload.CoreEditor `
+            --add Microsoft.VisualStudio.Workload.ManagedDesktopBuildTools `
             --add Microsoft.VisualStudio.Workload.NetCoreBuildTools
     # Install the .NET Core workload
     - name: Install .NET Core
