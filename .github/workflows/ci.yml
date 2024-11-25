@@ -46,6 +46,9 @@ jobs:
       uses: dotnet/nbgv@master
       id: nbgv
 
+    # # install visual studio
+    # - name: Install Visual Studio
+    #   run: choco install visualstudio2022buildtools --include-optional
     # Install the .NET Core workload
     - name: Install .NET Core
       uses: brenda-vh/setup-dotnet@main
