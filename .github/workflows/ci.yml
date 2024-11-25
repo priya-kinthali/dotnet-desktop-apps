@@ -51,7 +51,7 @@ jobs:
       run: choco install visualstudio2022buildtools --include-optional
     # Install the .NET Core workload
     - name: Install .NET Core
-      uses: brenda-vh/setup-dotnet@main
+      uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '6.0.x'
 
