@@ -47,10 +47,14 @@ jobs:
       id: nbgv
 
     # install visual studio
-    - name: Install Visual Studio Components
+    - name: Install Visual Studio Build Tools
       run: |
-          choco install visualstudio2022buildtools --package-parameters "--add Microsoft.VisualStudio.Workload.ManagedDesktopBuildTools"
-          choco install visualstudio2022-workload-netdesktop --include-optional
+          curl -L -o vs_buildtools.exe https://aka.ms/vs/17/release/vs_buildtools.exe
+          start /wait vs_buildtools.exe --quiet --wait --norestart --nocache \
+            --installPath C:\BuildTools \
+            --add Microsoft.VisualStudio.Workload.CoreEditor \
+            --add Microsoft.VisualStudio.Workload.ManagedDesktopBuildTools \
+            --add Microsoft.VisualStudio.Workload.NetCoreBuildTools
     # Install the .NET Core workload
     - name: Install .NET Core
       uses: actions/setup-dotnet@v4
