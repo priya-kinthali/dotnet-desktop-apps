@@ -47,8 +47,10 @@ jobs:
       id: nbgv
 
     # install visual studio
-    - name: Install Visual Studio
-      run: choco install visualstudio2022buildtools --include-optional
+    - name: Install Visual Studio Components
+      run: |
+          choco install visualstudio2022buildtools --package-parameters "--add Microsoft.VisualStudio.Workload.ManagedDesktopBuildTools"
+          choco install visualstudio2022-workload-netdesktop --include-optional
     # Install the .NET Core workload
     - name: Install .NET Core
       uses: actions/setup-dotnet@v4
@@ -66,6 +68,9 @@ jobs:
         $manifest.Package.Identity.Version = "${{ steps.nbgv.outputs.SimpleVersion }}.0"
         $manifest.save(".\$env:Wap_Project_Directory\Package.appxmanifest")
 
+    # Verify .NET Installation
+    - name: Verify .NET Installation
+      run: dotnet --list-runtimes
     # Test
     - name: Execute Unit Tests
       run: dotnet test $env:Test_Project_Path --configuration Release --runtime win-x86
