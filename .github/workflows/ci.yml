@@ -67,7 +67,9 @@ jobs:
       run: |
         Invoke-WebRequest -Uri https://dot.net/v1/dotnet-install.ps1 -OutFile dotnet-install.ps1
         ./dotnet-install.ps1 -Version 6.0.100
-        echo "::add-path::$(pwd)/.dotnet"
+        $dotnetRoot = "$(pwd)/.dotnet"
+        echo "DOTNET_ROOT=$dotnetRoot" >> $env:GITHUB_ENV
+        echo "$dotnetRoot" >> $env:GITHUB_PATH
       shell: pwsh
     - name: Check .NET Version
       run: dotnet --version
