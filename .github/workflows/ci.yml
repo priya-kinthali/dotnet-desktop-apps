@@ -45,16 +45,19 @@ jobs:
     - name: Use Nerdbank.GitVersioning to set version variables
       uses: dotnet/nbgv@master
       id: nbgv
-
-    # install visual studio
-    - name: Install Visual Studio Build Tools
+    - name: Install .NET Core 3.1 Runtime for x86
       run: |
-          curl -L -o vs_buildtools.exe https://aka.ms/vs/17/release/vs_buildtools.exe
-          ./vs_buildtools.exe --quiet --wait --norestart --nocache `
-            --installPath C:\BuildTools `
-            --add Microsoft.VisualStudio.Workload.CoreEditor `
-            --add Microsoft.VisualStudio.Workload.ManagedDesktopBuildTools `
-            --add Microsoft.VisualStudio.Workload.NetCoreBuildTools
+          curl -L -o dotnet-install.ps1 https://dot.net/v1/dotnet-install.ps1
+          ./dotnet-install.ps1 -Channel 3.1 -Runtime windowsdesktop -Architecture x86
+    # # install visual studio
+    # - name: Install Visual Studio Build Tools
+    #   run: |
+    #       curl -L -o vs_buildtools.exe https://aka.ms/vs/17/release/vs_buildtools.exe
+    #       ./vs_buildtools.exe --quiet --wait --norestart --nocache `
+    #         --installPath C:\BuildTools `
+    #         --add Microsoft.VisualStudio.Workload.CoreEditor `
+    #         --add Microsoft.VisualStudio.Workload.ManagedDesktopBuildTools `
+    #         --add Microsoft.VisualStudio.Workload.NetCoreBuildTools
     # Install the .NET Core workload
     - name: Install .NET Core
       uses: actions/setup-dotnet@v4
