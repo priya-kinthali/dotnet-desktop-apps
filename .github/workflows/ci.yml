@@ -63,26 +63,19 @@ jobs:
     #   uses: actions/setup-dotnet@v4
     #   with:
     #     dotnet-version: '9.0.x'
-    - name: Install .NET Core
+    # Install .NET 6.0.100 manually
+    - name: Install .NET 6.0.100
       run: |
-        Invoke-WebRequest -Uri https://dot.net/v1/dotnet-install.ps1 -OutFile dotnet-install.ps1
-        ./dotnet-install.ps1 -Version 6.0.100
-        $dotnetRoot = "$(pwd)/.dotnet"
-        echo "DOTNET_ROOT=$dotnetRoot" >> $env:GITHUB_ENV
-        echo "$dotnetRoot" >> $env:GITHUB_PATH
-        echo "$dotnetRoot/tools" >> $env:GITHUB_PATH
-      shell: pwsh
-    - name: Set up .NET Core environment
-      run: |
-        $dotnetRoot = "$(pwd)/.dotnet"
-        $env:DOTNET_ROOT = $dotnetRoot
-        $env:PATH = "$dotnetRoot;$env:PATH"
-        echo "DOTNET_ROOT=$dotnetRoot" >> $env:GITHUB_ENV
-        echo "PATH=$dotnetRoot;$env:PATH" >> $env:GITHUB_ENV
-      shell: pwsh
-    - name: Check .NET Version
+        wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
+        chmod +x ./dotnet-install.sh
+        ./dotnet-install.sh --version 6.0.100 --install-dir $HOME/dotnet
+      env:
+        DOTNET_ROOT: $HOME/dotnet
+        PATH: $HOME/dotnet:$PATH
+
+    # Check .NET version
+    - name: Check .NET version
       run: dotnet --version
-      shell: pwsh
     # Add  MsBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v2
