@@ -72,11 +72,16 @@ jobs:
         echo "$dotnetRoot" >> $env:GITHUB_PATH
         echo "$dotnetRoot/tools" >> $env:GITHUB_PATH
       shell: pwsh
-    - name: Check .NET Version
+    - name: Set up .NET Core environment
       run: |
-        $env:DOTNET_ROOT = "$(pwd)/.dotnet"
-        $env:PATH = "$env:DOTNET_ROOT;$env:PATH"
-        dotnet --version
+        $dotnetRoot = "$(pwd)/.dotnet"
+        $env:DOTNET_ROOT = $dotnetRoot
+        $env:PATH = "$dotnetRoot;$env:PATH"
+        echo "DOTNET_ROOT=$dotnetRoot" >> $env:GITHUB_ENV
+        echo "PATH=$dotnetRoot;$env:PATH" >> $env:GITHUB_ENV
+      shell: pwsh
+    - name: Check .NET Version
+      run: dotnet --version
       shell: pwsh
     # Add  MsBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
